@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saldo Masuk 🎉</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#171a2e,#30205c);
+  color:white; overflow:hidden;
+}
+.card{
+  width:min(92%,420px); padding:32px 24px; text-align:center;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+  border-radius:28px; box-shadow:0 20px 60px rgba(0,0,0,.35);
+  backdrop-filter:blur(12px);
+}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:#ffffff18;font-size:13px}
+h1{font-size:27px;margin:20px 0 8px}
+.amount{font-size:42px;font-weight:800;margin:18px 0 8px}
+.sub{opacity:.75;margin-bottom:25px}
+.timer{font-size:15px;opacity:.8;margin-bottom:18px}
+button{
+  width:100%; border:0; padding:16px; border-radius:15px;
+  font-size:17px;font-weight:700;cursor:pointer;
+  background:#fff;color:#171a2e;
+}
+button:active{transform:scale(.98)}
+.hidden{display:none}
+.prank{font-size:52px;margin:8px 0}
+.message{font-size:21px;font-weight:800}
+.small{font-size:13px;opacity:.65;margin-top:18px}
+.confetti{position:fixed;top:-20px;font-size:22px;animation:fall 2.2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="card" id="main">
+  <div class="badge">🎁 PEMBERITAHUAN SALDO</div>
+  <h1>Selamat! Saldo masuk</h1>
+  <div class="amount">Rp2.000.000</div>
+  <div class="sub">Saldo virtual hadiah untuk kamu</div>
+  <div class="timer">Tawaran berakhir dalam <b id="time">10</b> detik</div>
+  <button onclick="claim()">Klaim Saldo</button>
+  <div class="small">Demo/prank — tidak ada transaksi atau data yang diproses.</div>
+</div>
+
+<div class="card hidden" id="result">
+  <div class="prank">😂</div>
+  <div class="message">PRANK BROOO!</div>
+  <p>Rp2.000.000-nya cuma saldo virtual 🤣</p>
+  <p class="small">Tenang, tidak ada data atau uang yang diambil dari kamu.</p>
+</div>
+
+<script>
+let t=10;
+const timer=setInterval(()=>{
+  t--;
+  document.getElementById("time").textContent=t;
+  if(t<=0){clearInterval(timer);document.getElementById("time").textContent="0";}
+},1000);
+
+function claim(){
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  for(let i=0;i<35;i++){
+    const e=document.createElement("div");
+    e.className="confetti";
+    e.textContent=["🎉","😂","💸","🤣","✨"][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.animationDelay=Math.random()*0.8+"s";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),3000);
+  }
+}
+</script>
+</body>
+</html>
